@@ -2,16 +2,27 @@ import model
 
 
 def main():
-    b = model.Board()
+    c = model.Context()
+    print(c.cursor.col, c.cursor.row)
     
-    b.add_task("Say 'Hello, World!'")
-    print(b[model.State.UPCOMING], b[model.State.ONGOING])
+    c.board.add_task("task 1")
+    c.board.add_task("task 2")
+    c.move_cursor_to(model.State.UPCOMING, 1)
+    print(c.cursor.col, c.cursor.row)
+    
+    c.move_cursor_to(model.State.UPCOMING, 999)
+    print(c.cursor.col, c.cursor.row)
 
-    b.move_task("Say 'Hello, World!'", model.State.ONGOING)
-    print(b[model.State.UPCOMING], b[model.State.ONGOING])
-    
-    b.remove_task("Say 'Hello, World!'")
-    print(b[model.State.UPCOMING], b[model.State.ONGOING])
+    c.move_cursor_up()
+    print(c.cursor.col, c.cursor.row)
+
+    c.move_cursor_down()
+    print(c.cursor.col, c.cursor.row)
+
+    c.board.add_task("task 3", model.State.PAUSED)
+    c.board.add_task("task 4", model.State.DONE)
+    c.move_cursor_right()
+    print(c.cursor.col, c.cursor.row)
 
 
 if __name__ == "__main__":
