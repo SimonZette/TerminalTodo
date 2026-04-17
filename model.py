@@ -55,9 +55,16 @@ class Cursor:
         self.col = col
         self.row = row
 
+    def __eq__(self, other) -> bool:
+        return self.col == other.col and self.row == other.row
+
 class Context:
     board = Board()
     cursor = Cursor()
+    project_name: str
+
+    def __init__(self, project_name: str):
+        self.project_name = project_name
 
     def clamp_row(self):
         self.cursor.row = min(self.cursor.row, len(self.board[self.cursor.col]) - 1)
